@@ -1,8 +1,8 @@
-# 🧠 RepoMind: GitHub Repository Intelligence System
+# RepoMind: GitHub Repository Intelligence System
 
 An AI-powered system that analyzes GitHub repositories through natural language queries, combining semantic search, embeddings, and agentic reasoning to provide intelligent insights into any codebase.
 
-## 🌟 Features
+## Features
 
 - **Repository Cloning & Analysis**: Clone any public GitHub repository and instantly analyze its structure
 - **Multi-language Support**: Intelligent parsing of Python, JavaScript, TypeScript, Java, Go, Rust, and more
@@ -13,14 +13,14 @@ An AI-powered system that analyzes GitHub repositories through natural language 
 - **Persistent Vector Database**: ChromaDB for storing and retrieving embeddings
 - **LLM Integration**: Powered by Ollama for local, privacy-respecting inference
 
-## 📋 Prerequisites
+## Prerequisites
 
 - **Python 3.10+**
 - **Node.js** (for frontend development)
 - **Ollama** (for local LLM inference) - [Download](https://ollama.ai)
 - **Git** (for cloning repositories)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone and Setup
 
@@ -79,7 +79,7 @@ The API will be available at `http://localhost:8000`
 
 Navigate to `http://localhost:8000` in your browser (frontend is served by FastAPI)
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 RepoMind/
@@ -102,7 +102,7 @@ RepoMind/
 └── README.md               # This file
 ```
 
-## 🔧 API Endpoints
+## API Endpoints
 
 ### Repository Management
 
@@ -154,7 +154,7 @@ GET /repo-tree/{repo_name}
 
 Returns the file structure of a repository
 
-## 🏗️ Architecture
+## Architecture
 
 ### Data Pipeline
 
@@ -190,7 +190,7 @@ User Query
 Browser Display
 ```
 
-## 🔑 Key Components
+## Key Components
 
 ### 1. **Cloner** (`cloner.py`)
 - Clones GitHub repositories using GitPython
@@ -229,7 +229,7 @@ Browser Display
 - Markdown rendering with Marked.js
 - Obsidian-inspired UI styling
 
-## ⚙️ Configuration
+## Configuration
 
 Edit `backend/config.py` to customize:
 
@@ -260,7 +260,7 @@ Code analysis supports:
 - Java, C/C++, Go, Rust, Ruby
 - And many more (configurable in `CODE_EXTENSIONS`)
 
-## 💡 Usage Examples
+## Usage Examples
 
 ### Example 1: Analyze Authentication Flow
 ```
@@ -287,7 +287,7 @@ Query: "What external libraries does this project use?"
 → Explains purpose of major dependencies
 ```
 
-## 🔄 Workflow
+## Workflow
 
 1. **Index Repository**: Provide GitHub URL → System clones and embeds
 2. **Wait for Completion**: Monitor indexing progress via SSE
@@ -295,7 +295,7 @@ Query: "What external libraries does this project use?"
 4. **Receive Insights**: Get AI-powered answers with code references
 5. **Explore Further**: Navigate file structure and documents
 
-## 🛠️ Development
+## Development
 
 ### Running Tests
 
@@ -320,7 +320,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 ```
 
-## 📦 Dependencies
+## Dependencies
 
 ### Backend
 - **FastAPI**: Modern Python web framework
@@ -336,75 +336,7 @@ logging.basicConfig(level=logging.DEBUG)
 - **Fetch API**: Modern HTTP client
 - **Vanilla JavaScript**: No frameworks needed
 
-## 🚨 Troubleshooting
 
-### Issue: "Connection refused" error
-**Solution**: Make sure Ollama is running
-```bash
-ollama serve
-```
-
-### Issue: Repository won't clone
-**Solution**: Ensure Git is installed and the URL is public
-
-### Issue: Slow indexing
-**Solution**: 
-- Increase `EMBEDDING_BATCH_SIZE` in config.py
-- Use a faster Ollama model
-- Use GPU acceleration with Ollama: `COMPUTE=gpu ollama serve`
-
-### Issue: Out of memory
-**Solution**: 
-- Reduce `CODE_CHUNK_SIZE` and `EMBEDDING_BATCH_SIZE`
-- Use a smaller embedding model
-- Use a quantized Ollama model
-
-## 🎯 Roadmap
-
-- [ ] Support for private repositories (GitHub token auth)
-- [ ] Multi-repository cross-analysis
-- [ ] Performance optimization with caching
-- [ ] Docker containerization
-- [ ] Dashboard for repository statistics
-- [ ] Export analysis reports
-- [ ] API rate limiting and authentication
-- [ ] Advanced filtering and search
-
-## 🤝 Contributing
-
-We welcome contributions! Please:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 👨‍💻 Author
-
-**Padmashali** [@thepadmashali17](https://github.com/thepadmashali17)
-
-## 🙏 Acknowledgments
-
-- [LangChain](https://www.langchain.com/) - LLM orchestration framework
-- [Ollama](https://ollama.ai) - Local LLM inference
-- [ChromaDB](https://www.trychroma.com/) - Vector database
-- [FastAPI](https://fastapi.tiangolo.com/) - Web framework
-- [sentence-transformers](https://www.sbert.net/) - Embedding models
-
-## 📞 Support
-
-For issues and questions:
-- Open an [Issue](https://github.com/thepadmashali17/GitHub-Repository-Intelligence-System-RepoMind-/issues)
-- Check [Discussions](https://github.com/thepadmashali17/GitHub-Repository-Intelligence-System-RepoMind-/discussions)
-
-## ⭐ Show Your Support
-
-If RepoMind helped you understand your codebase better, please give it a star! ⭐
 
 ---
 
