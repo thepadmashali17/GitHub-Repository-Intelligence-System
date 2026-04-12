@@ -336,8 +336,5 @@ logging.basicConfig(level=logging.DEBUG)
 - **Fetch API**: Modern HTTP client
 - **Vanilla JavaScript**: No frameworks needed
 
-
-
 ---
 
-**Built with ❤️ for developers who want to understand code faster**
