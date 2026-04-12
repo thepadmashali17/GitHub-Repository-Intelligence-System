@@ -1,0 +1,22 @@
+# Dependencies
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Project Data (Large bin files & 3rd party source)
+repos/
+chroma_db/
+backend/repos/
+backend/chroma_db/
+
+# Environment / Secrets
+.env
+secret.json
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RepoMind | Code Intelligence</title>
+    <!-- Favicon placeholder -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%224%22 fill=%22%230070f3%22/><text y=%22.9em%22 font-size=%2280%22 font-weight=%22bold%22 fill=%22white%22 x=%2215%22>R</text></svg>">
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- The Synthetic Monolith Background Glow -->
+        <div class="background-glow"></div>
+
+        <!-- Global Header -->
+        <header>
+            <div class="logo">
+                <div class="logo-icon">🧠</div>
+                <div class="logo-text">RepoMind</div>
+            </div>
+            
+            <div class="header-actions">
+                <!-- Recessed active repo badge -->
+                <div id="active-repo-badge" style="display: none; padding: 6px 16px; background: var(--surface-lowest); border-radius: 100px; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--brand-accent);">
+                    <span id="active-repo-name"></span>
+                </div>
+                
+                <div id="header-repo-badge" style="display: none; align-items: center; gap: 8px;">
+                    <span class="repo-name-text" style="display: none;"></span> <!-- Hidden but needed for JS -->
+                    <button id="btn-back-home" style="background: var(--surface-low); border: none; width: 32px; height: 32px; border-radius: 2px; color: var(--on-surface); cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Landing View -->
+        <section id="landing-view" class="view active landing-view">
+            <div class="hero-section">
+                <!-- Hero text removed per user request -->
+                
+                <div style="margin-top: 48px; display: flex; justify-content: center;">
+                    <div class="url-card-container">
+                        <div class="url-input-wrap">
+                            <input type="text" id="repo-url-input" placeholder="https://github.com/organization/repository" autocomplete="off">
+                        </div>
+                        <button id="btn-index" class="btn-primary">
+                            INDEX
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="indexed-repos-section" class="repos-section" style="display: none;">
+                <span class="blueprint-label" style="margin-bottom: 16px; display: block;">Locally Indexed Repositories</span>
+                <div id="repos-list" class="repos-grid">
+                    <!-- Repo cards inserted by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Indexing View -->
+        <section id="indexing-view" class="view indexing-view">
+            <div class="indexing-container">
+                <div class="loader-orbit"></div>
+                <h2 id="indexing-status-title" style="font-size: 24px; margin-bottom: 12px;">Processing Source</h2>
+                <div id="indexing-repo-url" style="color: var(--on-surface-variant); font-family: var(--font-mono); font-size: 13px;"></div>
+                
+                <div class="progress-list">
+                    <div id="step-clone" class="step-item">
+                        <span class="icon">○</span> 
+                        <span>Cloning source files</span>
+                    </div>
+                    <div id="step-parse" class="step-item">
+                        <span class="icon">○</span> 
+                        <span>Parsing technical graph</span>
+                    </div>
+                    <div id="step-embed" class="step-item">
+                        <span class="icon">○</span> 
+                        <span>Vector state persistance</span>
+                    </div>
+                </div>
+
+                <div id="indexing-log" style="margin-top: 48px; font-family: var(--font-mono); font-size: 11px; color: var(--on-surface-muted); text-align: left; height: 120px; overflow-y: auto; background: var(--surface-lowest); padding: 16px; border-radius: 4px;">
+                    <!-- Real-time raw logs -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Chat View -->
+        <section id="chat-view" class="view chat-view">
+            <div class="chat-container">
+                <div id="chat-messages" class="chat-messages">
+                    <!-- Dashboard Welcome state -->
+                    <div id="chat-welcome" style="margin: 40px auto; text-align: center; max-width: 800px;">
+                        <div style="font-size: 48px; margin-bottom: 24px; opacity: 0.8;">🧠</div>
+                        <h2 style="font-size: 32px; margin-bottom: 12px;">Synthesis Environment Ready</h2>
+                        <p style="color: var(--on-surface-variant); font-size: 18px; margin-bottom: 40px;">Ask architectural prompts or explore deep module logic.</p>
+                        
+                        <div class="welcome-grid">
+                            <div class="q-box example-q" data-q="Explain the overall architecture and high-level flow.">
+                                <h4>🏗️ ARCHITECTURE</h4>
+                                <p>System topology and design patterns.</p>
+                            </div>
+                            <div class="q-box example-q" data-q="Where is the core business logic or entry point?">
+                                <h4>🎯 CORE LOGIC</h4>
+                                <p>Entry points and main controllers.</p>
+                            </div>
+                            <div class="q-box example-q" data-q="How are dependencies and configurations managed?">
+                                <h4>📦 DEPENDENCIES</h4>
+                                <p>Package graph and module setup.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-area">
+                    <div class="compose-box">
+                        <textarea id="chat-input" rows="1" placeholder="Search the synthesized knowledge..."></textarea>
+                        <button id="btn-send" class="btn-send">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Core Libs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
