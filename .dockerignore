@@ -1,0 +1,11 @@
+.git
+.gitignore
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+repos
+chroma_db
+backend/repos
+backend/chroma_db

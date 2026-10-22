@@ -9,15 +9,17 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from sse_starlette.sse import EventSourceResponse
+import uvicorn
 
 from cloner import clone_repository
 from parser import parse_all_files
 from embedder import embed_and_store, list_collections, delete_collection
 from agent import query_repository
+from config import CORS_ALLOWED_ORIGINS, FRONTEND_DIR, API_HOST, API_PORT
 
 
 # ── Lifespan ──────────────────────────────────────────────────────────────
@@ -38,7 +40,7 @@ app = FastAPI(
 # CORS for development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"] if "*" in CORS_ALLOWED_ORIGINS else CORS_ALLOWED_ORIGINS,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -181,11 +183,20 @@ async def remove_repo(repo_name: str):
     return {"message": f"Repository {repo_name} deleted"}
 
 
+@app.get("/healthz")
+async def health_check():
+    return {"status": "ok"}
+
+
 # ── Serve Frontend ────────────────────────────────────────────────────────
 
-app.mount("/static", StaticFiles(directory="../frontend"), name="static")
+app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
 
 
 @app.get("/")
 async def serve_frontend():
-    return FileResponse("../frontend/index.html")
+    return FileResponse(FRONTEND_DIR / "index.html")
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host=API_HOST, port=API_PORT)
