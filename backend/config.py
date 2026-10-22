@@ -9,6 +9,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 REPOS_DIR = BASE_DIR / "repos"
 CHROMA_DIR = BASE_DIR / "chroma_db"
+FRONTEND_DIR = BASE_DIR / "frontend"
 
 REPOS_DIR.mkdir(parents=True, exist_ok=True)
 CHROMA_DIR.mkdir(parents=True, exist_ok=True)
@@ -16,6 +17,19 @@ CHROMA_DIR.mkdir(parents=True, exist_ok=True)
 # ── Ollama ─────────────────────────────────────────────────────────────────
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen3:8b")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+
+# ── API Runtime ─────────────────────────────────────────────────────────────
+API_HOST = os.getenv("API_HOST", "0.0.0.0")
+try:
+    API_PORT = int(os.getenv("API_PORT", "8000"))
+except ValueError:
+    API_PORT = 8000
+
+_cors_origins = os.getenv(
+    "CORS_ALLOWED_ORIGINS",
+    "http://localhost:8000,http://127.0.0.1:8000",
+)
+CORS_ALLOWED_ORIGINS = [origin.strip() for origin in _cors_origins.split(",") if origin.strip()]
 
 # ── Embedding ──────────────────────────────────────────────────────────────
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
